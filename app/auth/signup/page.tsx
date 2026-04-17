@@ -41,7 +41,7 @@ export default function SignUpPage() {
 
       if (res.ok) {
         toast("Welcome to ShopMart!", "Account created successfully. Please sign in.", "success");
-        router.push("/auth/signin");
+        router.push("/");
       } else {
         setError(data.message || "Something went wrong. Please try again.");
       }
@@ -74,76 +74,72 @@ export default function SignUpPage() {
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           <div className="md:col-span-2">
-            <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Full Name</label>
+            <label className="block text-xs font-black text-black uppercase tracking-widest mb-2 px-1">Full Name</label>
             <div className="relative">
               <input 
                 required
                 type="text"
                 name="name"
                 placeholder="John Doe"
-                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
+                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold text-black outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
               />
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-black" size={18} />
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Email Address</label>
+            <label className="block text-xs font-black text-black uppercase tracking-widest mb-2 px-1">Email Address</label>
             <div className="relative">
               <input 
                 required
                 type="email"
                 name="email"
                 placeholder="you@example.com"
-                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
+                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold text-black outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
               />
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-black" size={18} />
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Phone Number</label>
+          <div className="md:col-span-2">
+            <label className="block text-xs font-black text-black uppercase tracking-widest mb-2 px-1">Phone Number</label>
             <div className="relative">
               <input 
                 required
                 type="tel"
                 name="phone"
                 placeholder="01012345678"
-                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
+                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold text-black outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
               />
-              <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-black" size={18} />
             </div>
           </div>
 
           <div>
-             {/* Empty space for grid alignment or more fields */}
-          </div>
-
-          <div>
-            <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Password</label>
+            <label className="block text-xs font-black text-black uppercase tracking-widest mb-2 px-1">Password</label>
             <div className="relative">
               <input 
                 required
                 type="password"
                 name="password"
                 placeholder="••••••••"
-                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
+                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold text-black outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
               />
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-black" size={18} />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Confirm Password</label>
+            <label className="block text-xs font-black text-black uppercase tracking-widest mb-2 px-1">Confirm Password</label>
             <div className="relative">
               <input 
                 required
                 type="password"
                 name="rePassword"
                 placeholder="••••••••"
-                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
+                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold text-black outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
               />
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-black" size={18} />
             </div>
           </div>
 
