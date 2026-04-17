@@ -1,0 +1,101 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Mail, ArrowRight, Loader2, AlertCircle, KeyRound } from "lucide-react";
+import { useToast } from "@/context/ToastContext";
+
+export default function ForgotPasswordPage() {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/forgotPasswords`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast("Email Sent!", "A reset code has been sent to your inbox.", "success");
+        
+        router.push(`/auth/verify-code?email=${encodeURIComponent(email)}`);
+      } else {
+        setError(data.message || "Email address not found.");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 font-sans antialiased">
+      <div className="w-full max-w-md bg-white rounded-3xl border border-slate-200 shadow-2xl shadow-slate-200/50 p-8 md:p-10 animate-in fade-in zoom-in duration-500">
+        
+        <div className="text-center mb-10">
+          <div className="w-16 h-16 bg-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-amber-500/20">
+            <KeyRound className="text-white" size={32} />
+          </div>
+          <h1 className="text-3xl font-black text-slate-900 tracking-tighter mb-2">Forgot Password?</h1>
+          <p className="text-slate-500 font-medium">Enter your email and we'll send you a code to reset your password.</p>
+        </div>
+
+        {error && (
+          <div className="mb-6 p-4 bg-rose-50 border border-rose-100 rounded-2xl flex items-center gap-3 text-rose-600 text-sm font-bold">
+            <AlertCircle size={18} />
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Email Address</label>
+            <div className="relative">
+              <input 
+                required
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl pl-12 pr-4 text-sm font-bold outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all placeholder:text-slate-300"
+              />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+            </div>
+          </div>
+
+          <button 
+            type="submit"
+            disabled={isLoading}
+            className="w-full h-14 bg-slate-900 hover:bg-indigo-600 text-white font-black rounded-2xl shadow-xl shadow-slate-900/10 transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3"
+          >
+            {isLoading ? (
+              <Loader2 className="animate-spin" size={20} />
+            ) : (
+              <>Send Reset Code <ArrowRight size={18} /></>
+            )}
+          </button>
+        </form>
+
+        <div className="mt-10 pt-8 border-t border-slate-100 text-center">
+          <button onClick={() => router.back()} className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors">
+            ← Back to Sign In
+          </button>
+        </div>
+
+      </div>
+    </div>
+  );
+}
