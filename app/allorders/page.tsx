@@ -17,7 +17,7 @@ export default async function AllOrdersPage() {
     redirect("/auth/signin");
   }
 
-  let orders = [];
+  let orders: any[] = [];
   try {
     orders = await getAllOrders(token) || [];
   } catch (error) {

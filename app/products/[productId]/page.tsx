@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getProductById, getRelatedProducts } from "@/services/products.service";
-
 import ProductGallery from "@/app/products/[productId]/_components/ProductGallery";
 import ProductInfo from "@/app/products/[productId]/_components/ProductInfo";
 import RelatedProducts from "@/app/products/[productId]/_components/RelatedProducts";
@@ -15,10 +14,9 @@ interface ProductPageProps {
 export default async function ProductPage({ params }: ProductPageProps) {
   const { productId } = await params;
 
-  let product;
-  try {
-    product = await getProductById(productId);
-  } catch (error) {
+  const product = await getProductById(productId);
+
+  if (!product) {
     notFound();
   }
 

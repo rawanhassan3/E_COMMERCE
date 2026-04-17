@@ -16,7 +16,8 @@ export async function getProducts(
   const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch products: ${res.status} ${res.statusText}`);
+    console.error(`Failed to fetch products: ${res.status} ${res.statusText}`);
+    return [];
   }
 
   const json: IProductResponse = await res.json();
@@ -47,13 +48,14 @@ export async function getSubcategories(categoryId?: string): Promise<any[]> {
   return json.data;
 }
 
-export async function getProductById(id: string): Promise<IProduct> {
+export async function getProductById(id: string): Promise<IProduct | null> {
   const res = await fetch(`${BASE_URL}/api/v1/products/${id}`, {
     cache: "no-store",
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch product ${id}: ${res.status} ${res.statusText}`);
+    console.error(`Failed to fetch product ${id}: ${res.status} ${res.statusText}`);
+    return null;
   }
 
   const json: { data: IProduct } = await res.json();
@@ -66,6 +68,7 @@ export async function getRelatedProducts(categoryId: string, limit: number = 4):
   });
 
   if (!res.ok) {
+    console.error(`Failed to fetch related products: ${res.status} ${res.statusText}`);
     return [];
   }
 

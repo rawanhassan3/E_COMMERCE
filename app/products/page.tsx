@@ -1,5 +1,6 @@
 import { getProducts, getCategories, getBrands } from "@/services/products.service";
 import InnerProducts from "./InnerProducts";
+import { IProduct } from "@/interfaces/product.interface";
 
 export const metadata = {
   title: 'Shop All Products | ShopMart',
@@ -12,9 +13,9 @@ export default async function ProductsPage({
   searchParams: { category?: string; brand?: string };
 }) {
   const { category: categoryId, brand: brandId } = await searchParams;
-  let products = [];
-  let selectedCategory = null;
-  let selectedBrand = null;
+  let products: IProduct[] = [];
+  let selectedCategory: any = null;
+  let selectedBrand: any = null;
 
   try {
     products = await getProducts(40, 1, categoryId, brandId) || [];
