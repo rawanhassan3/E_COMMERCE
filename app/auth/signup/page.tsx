@@ -31,7 +31,8 @@ export default function SignUpPage() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signup`, {
+      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://ecommerce.routemisr.com';
+      const res = await fetch(`${BASE_URL}/api/v1/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password, rePassword, phone }),
@@ -40,8 +41,8 @@ export default function SignUpPage() {
       const data = await res.json();
 
       if (res.ok) {
-        toast("Welcome to ShopMart!", "Account created successfully. Please sign in.", "success");
-        router.push("/");
+        toast("Welcome to ShopMart!", "Account created successfully. Please sign in to continue.", "success");
+        router.push("/auth/signin");
       } else {
         setError(data.message || "Something went wrong. Please try again.");
       }
@@ -101,7 +102,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          <div className="md:col-span-2">
+          <div>
             <label className="block text-xs font-black text-black uppercase tracking-widest mb-2 px-1">Phone Number</label>
             <div className="relative">
               <input 

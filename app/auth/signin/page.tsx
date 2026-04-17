@@ -20,6 +20,10 @@ export default function SignInPage() {
     setIsLoading(true);
     setError(null);
 
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
     try {
       const res = await signIn("credentials", {
         email,
@@ -45,7 +49,7 @@ export default function SignInPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 font-sans antialiased">
       <div className="w-full max-w-md bg-white rounded-3xl border border-slate-200 shadow-2xl shadow-slate-200/50 p-8 md:p-10 animate-in fade-in zoom-in duration-500">
-        
+
         <div className="text-center mb-10">
           <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-indigo-600/20">
             <LogIn className="text-white" size={32} />
@@ -65,7 +69,7 @@ export default function SignInPage() {
           <div>
             <label className="block text-xs font-black text-black uppercase tracking-widest mb-2 px-1">Email Address</label>
             <div className="relative">
-              <input 
+              <input
                 required
                 type="email"
                 value={email}
@@ -83,7 +87,7 @@ export default function SignInPage() {
               <Link href="/auth/forgot-password" className="text-[10px] font-black text-indigo-600 uppercase tracking-wider hover:underline">Forgot Password?</Link>
             </div>
             <div className="relative">
-              <input 
+              <input
                 required
                 type="password"
                 value={password}
@@ -95,7 +99,7 @@ export default function SignInPage() {
             </div>
           </div>
 
-          <button 
+          <button
             type="submit"
             disabled={isLoading}
             className="w-full h-14 bg-slate-900 hover:bg-indigo-600 text-white font-black rounded-2xl shadow-xl shadow-slate-900/10 transition-all active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3 mt-4"
