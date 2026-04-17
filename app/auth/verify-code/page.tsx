@@ -24,7 +24,8 @@ function VerifyCodeContent() {
     const resetCode = formData.get("resetCode") as string;
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/verifyResetCode`, {
+      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://ecommerce.routemisr.com';
+      const res = await fetch(`${BASE_URL}/api/v1/auth/verifyResetCode`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ resetCode }),

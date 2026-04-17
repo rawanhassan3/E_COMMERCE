@@ -20,7 +20,8 @@ export default function ForgotPasswordPage() {
     const email = formData.get("email") as string;
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/forgotPasswords`, {
+      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://ecommerce.routemisr.com';
+      const res = await fetch(`${BASE_URL}/api/v1/auth/forgotPasswords`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

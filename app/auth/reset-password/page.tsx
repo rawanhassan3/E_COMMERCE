@@ -31,7 +31,8 @@ function ResetPasswordContent() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/resetPassword`, {
+      const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://ecommerce.routemisr.com';
+      const res = await fetch(`${BASE_URL}/api/v1/auth/resetPassword`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, newPassword }),
