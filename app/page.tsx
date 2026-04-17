@@ -7,8 +7,7 @@ import ProductCard from "@/components/ProductCard";
 import { IProduct } from '@/interfaces/product.interface';
 
 export const metadata = {
-  title: 'ShopMart | Your Premium E-Commerce Destination',
-  description: 'Discover curated collections of premium products at ShopMart.',
+  title: 'Home',
 };
 
 export default async function Home() {
