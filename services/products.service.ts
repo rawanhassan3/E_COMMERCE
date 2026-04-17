@@ -1,7 +1,7 @@
 import { IProduct } from "@/interfaces/product.interface";
 import { IProductResponse } from "@/types/responsetypes";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://ecommerce.routemisr.com';
 
 export async function getProducts(
   limit: number = 32,

@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Missing credentials");
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/auth/signin`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://ecommerce.routemisr.com'}/api/v1/auth/signin`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -64,5 +64,5 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || 'pL9k2vQ7rX5mW4zS3nB8jH6gD1fA0sY1',
 };
