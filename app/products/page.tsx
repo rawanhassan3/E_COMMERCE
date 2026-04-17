@@ -12,19 +12,24 @@ export default async function ProductsPage({
   searchParams: { category?: string; brand?: string };
 }) {
   const { category: categoryId, brand: brandId } = await searchParams;
-  const products = await getProducts(40, 1, categoryId, brandId);
-
+  let products = [];
   let selectedCategory = null;
   let selectedBrand = null;
 
-  if (categoryId) {
-    const categories = await getCategories();
-    selectedCategory = categories.find((c) => c._id === categoryId);
-  }
+  try {
+    products = await getProducts(40, 1, categoryId, brandId) || [];
 
-  if (brandId) {
-    const brands = await getBrands();
-    selectedBrand = brands.find((b) => b._id === brandId);
+    if (categoryId) {
+      const categories = await getCategories();
+      selectedCategory = categories.find((c) => c._id === categoryId);
+    }
+
+    if (brandId) {
+      const brands = await getBrands();
+      selectedBrand = brands.find((b) => b._id === brandId);
+    }
+  } catch (error) {
+    console.error("Products page data fetch error:", error);
   }
 
   return (

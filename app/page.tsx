@@ -12,8 +12,19 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const products = await getProducts(8) || [];
-  const categories = await getCategories() || [];
+  let products = [];
+  let categories = [];
+  
+  try {
+    const [productsRes, categoriesRes] = await Promise.all([
+      getProducts(8),
+      getCategories()
+    ]);
+    products = productsRes || [];
+    categories = categoriesRes || [];
+  } catch (error) {
+    console.error("Home page data fetch error:", error);
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-white font-sans">

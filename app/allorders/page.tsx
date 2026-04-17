@@ -17,6 +17,11 @@ export default async function AllOrdersPage() {
     redirect("/auth/signin");
   }
 
-  const orders = await getAllOrders(token);
+  let orders = [];
+  try {
+    orders = await getAllOrders(token) || [];
+  } catch (error) {
+    console.error("AllOrders page data fetch error:", error);
+  }
   return <InnerAllOrders orders={orders} />;
 }
